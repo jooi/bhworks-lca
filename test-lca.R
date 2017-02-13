@@ -16,8 +16,8 @@ attr3 <- abs(attr2)
 attr4 <- attr3 + 1
 
 # transform data into characters, transpose
-tmp <- sapply(attr4, as.character)
-attr5 <- t(matrix(c(tmp, sapply(attr4, sub, pattern = "(.)(.)", replacement = "\\2\\1")), 4, byrow = TRUE))
+tmp <- sapply(attr2, as.character)
+attr5 <- t(matrix(c(tmp, sapply(attr2, sub, pattern = "(.)(.)", replacement = "\\2\\1")), 4, byrow = TRUE))
 colnames(attr5) <- (c('BHSED04', 'BHSED05', 'BHSED06', 'BHSED07'))
 attr6 <- as.data.frame(attr5)
 
