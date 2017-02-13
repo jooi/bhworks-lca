@@ -1,5 +1,5 @@
-# set up the environment
-setwd("C:/Users/Gavyn/Documents/R/BH-Works/LCA")
+# set up environment
+setwd("C:/Users/Gavyn/Documents/R/BH-Works/LCA/bhworks-lca")
 library(poLCA)
 
 # load the data
