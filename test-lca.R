@@ -18,5 +18,5 @@ colnames(attr5) <- (c('BHSED04', 'BHSED05', 'BHSED06', 'BHSED07'))
 attr6 <- as.data.frame(attr5)
 
 # run LCA
-test <- poLCA(f, attr6, nclass=2)
+test <- poLCA(f, attr6, nclass=2,nrep=20)
 
