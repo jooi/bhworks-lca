@@ -11,10 +11,6 @@ attr <- read.csv('1023.csv', header=TRUE, sep=',', stringsAsFactors = FALSE)
 # convert all integers into positive integers
 attr2 <- subset(attr, Form.Version == "PC 12 to 24", select=c(BHSED04, BHSED05, BHSED06, BHSED07))
 
-# transform data to positive
-attr3 <- abs(attr2)
-attr4 <- attr3 + 1
-
 # transform data into characters, transpose
 tmp <- sapply(attr2, as.character)
 attr5 <- t(matrix(c(tmp, sapply(attr2, sub, pattern = "(.)(.)", replacement = "\\2\\1")), 4, byrow = TRUE))
