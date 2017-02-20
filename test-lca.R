@@ -9,7 +9,9 @@ f <- cbind(BHSED04, BHSED05, BHSED06, BHSED07)~1
 attr <- read.csv('1023.csv', header=TRUE, sep=',', stringsAsFactors = FALSE)
 
 # convert all integers into positive integers
-attr2 <- subset(attr, Form.Version == "PC 12 to 24", select=c(BHSED04, BHSED05, BHSED06, BHSED07))
+attr2 <- subset(attr, Form.Version == "PC 12 to 24" 
+                & BHSED04 >= 0 & BHSED05 >= 0 & BHSED06 >= 0 & BHSED07 >= 0,
+                select=c(BHSED04, BHSED05, BHSED06, BHSED07))
 
 # transform data into characters, add headers, convert to df
 tmp <- sapply(attr2, as.character)
@@ -26,8 +28,20 @@ riskmodel <- poLCA(f, attr3, nclass=2, nrep=20, graphs=TRUE)
 attr4 <- attr3
 attr4$LCA.Class <- factor(as.character(riskmodel$predclass))
 
+#converting factor variables into ordinal variables
+attr4$BHSED04 <- ordered(attr4$BHSED04, levels = c(0, 2, 4), 
+                         labels = c("Never", "Sometimes", "Often"))
+attr4$BHSED05 <- ordered(attr4$BHSED05, levels = c(0, 2, 4), 
+                         labels = c("Never", "Sometimes", "Often"))
+attr4$BHSED06 <- ordered(attr4$BHSED06, levels = c(0, 2, 4), 
+                         labels = c("Never", "Sometimes", "Often"))
+attr4$BHSED07 <- ordered(attr4$BHSED07, levels = c(0, 2, 4), 
+                         labels = c("Never", "Sometimes", "Often"))
+
+
+
 # conduct logistic regression
-model <- glm(LCA.Class ~., family=binomial(link='logit'), data=attr4)
+model <- glm(LCA.Class ~ BHSED04+BHSED05+BHSED06+BHSED07, data=attr4, family="binomial")
 summary(model)
 
 # establish train 
