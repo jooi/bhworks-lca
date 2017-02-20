@@ -13,10 +13,8 @@ attr2 <- subset(attr, Form.Version == "PC 12 to 24", select=c(BHSED04, BHSED05, 
 
 # transform data into characters, transpose
 tmp <- sapply(attr2, as.character)
-attr5 <- t(matrix(c(tmp, sapply(attr2, sub, pattern = "(.)(.)", replacement = "\\2\\1")), 4, byrow = TRUE))
-colnames(attr5) <- (c('BHSED04', 'BHSED05', 'BHSED06', 'BHSED07'))
-attr6 <- as.data.frame(attr5)
+colnames(tmp) <- (c('BHSED04', 'BHSED05', 'BHSED06', 'BHSED07'))
+attr3 <- as.data.frame(tmp)
 
 # run LCA
-test <- poLCA(f, attr6, nclass=2,nrep=20)
-
+test <- poLCA(f, attr3, nclass=2, nrep=20)
