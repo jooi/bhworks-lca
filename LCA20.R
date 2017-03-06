@@ -57,14 +57,19 @@ f <- cbind(BHSSA02A, BHSSA03A, BHSSC02, BHSSCFail, BHSF02, BHSF05,
            BHSSA06, BHSSA07, BHSSA08, BHST01, BHST02, BHST03, BHST04)~1
 
 # run LCA
-LCAmodel <- poLCA(f, dataset3, nclass=2, nrep=20, graphs=TRUE)
+LCAmodel <- poLCA(f, dataset3, nclass=2, nrep=100, graphs=TRUE)
 
-# creating new data frame with latent class assigned
+# Factor the variables
+dataset3 <- as.data.frame(lapply(dataset3, as.factor))
+
+# Assigning the latent class to the dataset
 dataset3$LCA.Class <- factor(as.character(LCAmodel$predclass))
 
 # conduct logistic regression
 model <- glm(LCA.Class ~ BHSSA02A+BHSSA03A+BHSSC02+BHSSCFail+BHSF02+BHSF05+
-             BHSSF02+BHSSF04+BHSSX01+BHSSX06+BHSSX05+BHSSA05+
+             BHSSF02+BHSSF04
+            # +BHSSX01+BHSSX06 # These two varibales are all zero
+             +BHSSX05+BHSSA05+
              BHSSA06+BHSSA07+BHSSA08+BHST01+BHST02+BHST03+BHST04, data=dataset3, family="binomial")
 summary(model)
 
