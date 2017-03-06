@@ -1,0 +1,30 @@
+﻿* Encoding: UTF-8.
+
+DATASET ACTIVATE DataSet1.
+LOGISTIC REGRESSION VARIABLES SuicideLifeHist
+  /METHOD=ENTER C
+  /METHOD=ENTER DepressionScore AgeAtScreen Gender
+  /CRITERIA=PIN(.05) POUT(.10) ITERATE(20) CUT(.5).
+
+
+LOGISTIC REGRESSION VARIABLES BHSSU04
+  /METHOD=ENTER C
+  /METHOD=ENTER DepressionScore AgeAtScreen Gender
+  /PRINT=CI(95)
+  /CRITERIA=PIN(.05) POUT(.10) ITERATE(20) CUT(.5).
+
+
+**the following variable was recoded 0 for missing when lifetime suicidality was no
+
+LOGISTIC REGRESSION VARIABLES SuicideCurrentHist
+  /METHOD=ENTER C
+  /METHOD=ENTER DepressionScore AgeAtScreen Gender
+  /CRITERIA=PIN(.05) POUT(.10) ITERATE(20) CUT(.5).
+
+**the following variable was created by recoding BHSSU04A (0 for missing when lifetime attempt was no)
+
+LOGISTIC REGRESSION VARIABLES CurrentAttempt
+  /METHOD=ENTER C
+  /METHOD=ENTER DepressionScore AgeAtScreen Gender
+  /PRINT=CI(95)
+  /CRITERIA=PIN(.05) POUT(.10) ITERATE(20) CUT(.5).
