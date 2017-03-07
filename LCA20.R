@@ -73,4 +73,8 @@ model <- glm(LCA.Class ~ BHSSA02A+BHSSA03A+BHSSC02+BHSSCFail+BHSF02+BHSF05+
              BHSSA06+BHSSA07+BHSSA08+BHST01+BHST02+BHST03+BHST04, data=dataset3, family="binomial")
 summary(model)
 
+# this model includes the top 7 from the paper; we have more managable beta coefficients here
+# when we lower the number of predictors in the logistic regression model
 
+# model <- glm(LCA.Class ~ BHSSA03A+BHST04+BHSSX06+BHST02+BHST03+BHSSX05+
+#                BHSSA02A, data=dataset3, family="binomial")
