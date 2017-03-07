@@ -1,5 +1,5 @@
 # load the data
-dataset = read.csv('/Users/LiYinuo/Desktop/mdlogix/bhworks-lca/joanna_raw.csv',
+dataset = read.csv('joanna_raw.csv',
                    header=TRUE)
 
 # selecting 20 variables from the PC data
@@ -66,15 +66,16 @@ dataset3 <- as.data.frame(lapply(dataset3, as.factor))
 dataset3$LCA.Class <- factor(as.character(LCAmodel$predclass))
 
 # conduct logistic regression
-model <- glm(LCA.Class ~ BHSSA02A+BHSSA03A+BHSSC02+BHSSCFail+BHSF02+BHSF05+
-             BHSSF02+BHSSF04
-            # +BHSSX01+BHSSX06 # These two varibales are all zero
-             +BHSSX05+BHSSA05+
-             BHSSA06+BHSSA07+BHSSA08+BHST01+BHST02+BHST03+BHST04, data=dataset3, family="binomial")
-summary(model)
+# model <- glm(LCA.Class ~ BHSSA02A+BHSSA03A+BHSSC02+BHSSCFail+BHSF02+BHSF05+
+#              BHSSF02+BHSSF04
+#             # +BHSSX01+BHSSX06 # These two varibales are all zero
+#              +BHSSX05+BHSSA05+
+#              BHSSA06+BHSSA07+BHSSA08+BHST01+BHST02+BHST03+BHST04, data=dataset3, family="binomial")
+# summary(model)
 
 # this model includes the top 7 from the paper; we have more managable beta coefficients here
 # when we lower the number of predictors in the logistic regression model
 
-# model <- glm(LCA.Class ~ BHSSA03A+BHST04+BHSSX06+BHST02+BHST03+BHSSX05+
-#                BHSSA02A, data=dataset3, family="binomial")
+model <- glm(LCA.Class ~ BHSSA03A+BHST04+BHST02+BHST03+BHSSX05+
+               BHSSA02A, data=dataset3, family="binomial")
+summary(model)
