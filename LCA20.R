@@ -79,3 +79,6 @@ dataset3$LCA.Class <- factor(as.character(LCAmodel$predclass))
 model <- glm(LCA.Class ~ BHSSA03A+BHST04+BHST02+BHST03+BHSSX05+
                BHSSA02A, data=dataset3, family="binomial")
 summary(model)
+
+sa03a <- glm(LCA.Class ~ BHSSA03A, data=dataset3, family="binomial")
+summary(sa03a)
